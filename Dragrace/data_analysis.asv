@@ -11,10 +11,7 @@ m=2000;
 F_Reib=0;
 lambda=1;
 c_R=0.2;
-r=22.86;
-v_0=0;
-S_0=0;
-
+r
 
 
 %Simulation Settings
