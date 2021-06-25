@@ -82,14 +82,15 @@ hold off;
 
 %Plotting Z
 figure();
-Z=M*9*100/r;
-plot(v,Z,v,FW,max(v),mean(Z(v==max(v))),'rx');
+n_tesla = [0 5000:1000:14000,20000,25000,25001];
+M_tesla = [493,493,411,352.5,308.1,273.6,246.5,224.3,205.4,189.8,175.8,123.25,98.6,0];
+plot(n_tesla*120*pi*r/900000,M_tesla*900/r,v,FW,max(v),mean(FW(v==max(v))),'rx');
 grid on;
 legend('Zugkraft','Gesamtfahrwiderstand');
 xlabel('v(kph)');
 ylabel('Kraft(N)');
 str4=['v_{max}=' num2str(max(v)) 'kph'];
-text(max(v)-40,mean(Z(v==max(v)))+500,[str4]);
+text(max(v)-40,mean(FW(v==max(v)))+500,[str4]);
 fig=gcf;
 fig.PaperUnits='centimeters';
 fig.PaperPosition=[0 0 16 16];
