@@ -10,38 +10,43 @@ gamma=0;
 m=2000;
 F_Reib=0;
 lambda=1;
-c_R=0.2;
-r=22.86;
+c_R=0.015;
+r=33.55;
 v_0=0;
 S_0=0;
 
 
 
 %Simulation Settings
-t_final=40;
+t_final=600;
 t_step=0.001;
 
 %run simulation & ectract data
 out=sim('dragrace').get('S_v');
 t=out.Time;
-v=out.Data(:,2);
 S=out.Data(:,1);
+v=out.Data(:,2);
+n=out.Data(:,3);
+M=out.Data(:,4);
+FW=out.Data(:,5);
 
 %plotting S
+t_Final=10;
 subplot(2,1,1);
 plot(t,S);
 grid on
-axis([0 t_final 0 10]);
+axis([0 t_Final 0 5]);
 xlabel('t(s)');
 ylabel('S(km)');
 % l1=legend('S(km)');
 % l1.FontSize = 12;
 
+%plotting v
 subplot(2,1,2); 
 hold on;
 plot(t,v);
 grid on
-axis([0 t_final 0 250]);
+axis([0 t_Final 0 150]);
 xlabel('t(s)');
 ylabel('v(kph)');
 
@@ -73,3 +78,23 @@ fig.PaperUnits='centimeters';
 fig.PaperPosition=[0 0 16 16];
 fig.PaperSize=[16 16];
 saveas(fig, 'S(km) and v(kph)','pdf');
+hold off;
+
+%Plotting Z
+figure();
+Z=M*9*100/r;
+plot(v,Z,v,FW,max(v),mean(Z(v==max(v))),'rx');
+grid on;
+legend('Zugkraft','Gesamtfahrwiderstand');
+xlabel('v(kph)');
+ylabel('Kraft(N)');
+str4=['v_{max}=' num2str(max(v)) 'kph'];
+text(max(v)-40,mean(Z(v==max(v)))+500,[str4]);
+fig=gcf;
+fig.PaperUnits='centimeters';
+fig.PaperPosition=[0 0 16 16];
+fig.PaperSize=[16 16];
+saveas(fig, 'Z and FW','pdf');
+hold off;
+
+
