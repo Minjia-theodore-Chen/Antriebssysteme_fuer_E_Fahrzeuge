@@ -31,11 +31,11 @@ M=out.Data(:,4);
 FW=out.Data(:,5);
 
 %plotting S
-t_Final=10;
+t_Final=15;
 subplot(2,1,1);
 plot(t,S);
 grid on
-axis([0 t_Final 0 5]);
+axis([0 t_Final 0 1]);
 xlabel('t(s)');
 ylabel('S(km)');
 % l1=legend('S(km)');
@@ -87,6 +87,7 @@ M_tesla = [493,493,411,352.5,308.1,273.6,246.5,224.3,205.4,189.8,175.8,123.25,98
 plot(n_tesla*120*pi*r/900000,M_tesla*900/r,v,FW,max(v),mean(FW(v==max(v))),'rx');
 grid on;
 legend('Zugkraft','Gesamtfahrwiderstand');
+axis([0 400 0 20000]);
 xlabel('v(kph)');
 ylabel('Kraft(N)');
 str4=['v_{max}=' num2str(max(v)) 'kph'];
